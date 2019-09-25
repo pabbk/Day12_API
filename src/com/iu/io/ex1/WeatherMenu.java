@@ -1,10 +1,12 @@
 package com.iu.io.ex1;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class WeatherMenu {
-	Scanner sc;
-	
+	private Scanner sc;
+	private WeatherService ws;
+	WeatherView wv=null;
 
 	public void start() {
 		//1.날씨정보초기화
@@ -14,6 +16,7 @@ public class WeatherMenu {
 		//5.날씨정보삭제
 		//6.종료
 		boolean check = true;
+		ArrayList<Weather> ar = new ArrayList<Weather>();
 		while(check) {
 			System.out.println("1.날씨정보초기화");
 			System.out.println("2.날씨정보출력");
@@ -27,11 +30,12 @@ public class WeatherMenu {
 			switch(choose)
 			{
 			case 1:
-				WeatherService ws = new WeatherService();
+				ws = new WeatherService();
 				ws.init();
 				break;
 			case 2:
-				System.out.println("날씨정보출력");
+				wv= new WeatherView();
+				wv.view(ar);
 				break;
 			case 3:
 				System.out.println("날씨검색출력");
@@ -42,13 +46,17 @@ public class WeatherMenu {
 			case 5:
 				System.out.println("날씨정보삭제");
 				break;
+			case 6:
+				check = false;
+				break;
 
 			default :
-				check = false;
+				System.out.println("잘못입력하셨습니다");
+				System.out.println("1~6 사이의 번호를 입력하세요");
 				break;
 			}
 		}
+	
 	}
-
 
 }
